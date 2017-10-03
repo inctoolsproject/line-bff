@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import BFFFFF
-from BFFFFF.lib.curve.ttypes import *
+import BFFFFf
+from BFFFFf.lib.curve.ttypes import *
 from datetime import datetime
 import time,random,sys,json,codecs,threading,glob,re
 
-cl = BFFFFF.LINE()
+cl = BFFFFf.LINE()
 cl.login(qr=True)
 cl.loginResult()
 
@@ -55,7 +55,7 @@ Bmid = kk.getProfile().mid
 Cmid = kc.getProfile().mid
 
 Bots=[mid,Amid,Bmid,Cmid]
-admin=["YOUR_MID_HERE"]
+admin=[mid]
 wait = {
     'contact':True,
     'autoJoin':True,
@@ -437,7 +437,7 @@ def bot(op):
                elif wait["dblacklist"] == True:
                    if msg.contentMetadata["mid"] in wait["blacklist"]:
                         del wait["blacklist"][msg.contentMetadata["mid"]]
-                        cl.sendText(msg.to,"แด้เบน.")
+                        cl.sendText(msg.to,"แก้แบน.")
                         ki.sendText(msg.to,"สำเร็จ")
                         kk.sendText(msg.to,"")
                         kc.sendText(msg.to,"")
@@ -581,7 +581,7 @@ def bot(op):
                     else:
                         cl.sendText(msg.to,"Not for use less than group")
 
-            #elif "gurl" == msg.text:
+            #elif "Gurl" == msg.text:
                 #print cl.getGroup(msg.to)
                 ##cl.sendMessage(msg)
             elif msg.text in ["Ourl","Link on","เปิดลิ้ง"]:
@@ -590,7 +590,7 @@ def bot(op):
                     X.preventJoinByTicket = False
                     cl.updateGroup(X)
                     if wait["lang"] == "JP":
-                        cl.sendText(msg.to,"เปิดลิ้ง")
+                        cl.sendText(msg.to,"ลิ้งเปิด")
                     else:
                         cl.sendText(msg.to,"already open")
                 else:
@@ -605,7 +605,7 @@ def bot(op):
                     X.preventJoinByTicket = True
                     cl.updateGroup(X)
                     if wait["lang"] == "JP":
-                        cl.sendText(msg.to,"ปิดลิ้ง")
+                        cl.sendText(msg.to,"ลิ้งปิด")
                     else:
                         cl.sendText(msg.to,"already close")
                 else:
@@ -676,9 +676,9 @@ def bot(op):
                             u = "ปิด"
                         else:
                             u = "เปิด"
-                        cl.sendText(msg.to,"[group name]\n" + str(ginfo.name) + "\n[gid]\n" + msg.to + "\n[group creator]\n" + gCreator + "\n[profile status]\nhttp://dl.profile.line.naver.jp/" + ginfo.pictureStatus + "\nสมาชิก:" + str(len(ginfo.members)) + "คน\npending:" + sinvitee + "เชิญค้างอยู่\nURL:" + u + "ลิ้งกลุ่ม")
+                        cl.sendText(msg.to,"[ชื่อกลุ่ม]\n" + str(ginfo.name) + "\n[gid]\n" + msg.to + "\n[group creator]\n" + gCreator + "\n[profile status]\nhttp://dl.profile.line.naver.jp/" + ginfo.pictureStatus + "\nสมาชิก:" + str(len(ginfo.members)) + "คน\npending:" + sinvitee + "เชิญค้างอยู่\nURL:" + u + "ลิ้งกลุ่ม")
                     else:
-                        cl.sendText(msg.to,"[group name]\n" + str(ginfo.name) + "\n[gid]\n" + msg.to + "\n[group creator]\n" + gCreator + "\n[profile status]\nhttp://dl.profile.line.naver.jp/" + ginfo.pictureStatus)
+                        cl.sendText(msg.to,"[ชื่อกลุ่ม]\n" + str(ginfo.name) + "\n[gid]\n" + msg.to + "\n[group creator]\n" + gCreator + "\n[profile status]\nhttp://dl.profile.line.naver.jp/" + ginfo.pictureStatus)
                 else:
                     if wait["lang"] == "JP":
                         cl.sendText(msg.to,"Can not be used outside the group")
@@ -1109,19 +1109,19 @@ def bot(op):
                         cl.sendText(msg.to,"è¦äº†å…³æ–­ã€‚")
             elif msg.text in ["Comment","ç•™è¨€ç¢ºèª"]:
                 cl.sendText(msg.to,"message changed to\n\n" + str(wait["comment"]))
-            elif msg.text in ["Gurl","ลิ้งกลุ่ม"]:
-                if msg.toType == 2:
-                    x = cl.getGroup(msg.to)
-                    if x.preventJoinByTicket == True:
-                        x.preventJoinByTicket = False
-                        cl.updateGroup(x)
-                    gurl = cl.reissueGroupTicket(msg.to)
-                    cl.sendText(msg.to,"line://ti/g/" + gurl)
-                else:
-                    if wait["lang"] == "JP":
-                        cl.sendText(msg.to,"Can't be used outside the group")
-                    else:
-                        cl.sendText(msg.to,"Not for use less than group")
+            #elif msg.text in ["Gurl","ลิ้งกลุ่ม"]:
+                #if msg.toType == 2:
+                    #x = cl.getGroup(msg.to)
+                    #if x.preventJoinByTicket == True:
+                        #x.preventJoinByTicket = False
+                        #cl.updateGroup(x)
+                    #gurl = cl.reissueGroupTicket(msg.to)
+                    #cl.sendText(msg.to,"line://ti/g/" + gurl)
+                #else:
+                    #if wait["lang"] == "JP":
+                        #cl.sendText(msg.to,"Can't be used outside the group")
+                    #else:
+                        #cl.sendText(msg.to,"Not for use less than group")
             elif msg.text in ["Cv1 gurl"]:
                 if msg.toType == 2:
                     x = cl.getGroup(msg.to)
@@ -1426,6 +1426,38 @@ def bot(op):
                                 except:
                                     ki.sendText(msg.to,"สำเร็จ")
 
+            elif "แก้แบน @" in msg.text:
+                if msg.toType == 2:
+                    print "[แก้แบน]ok"
+                    _name = msg.text.replace("แก้แบน @", "")
+                    _nametarget = _name.rstrip('  ')
+                    gs = ki.getGroup(msg.to)
+                    gs = kk.getGroup(msg.to)
+                    gs = kc.getGroup(msg.to)
+                    targets = []
+                    for g in gs.members:
+                        if _nametarget == g.displayName:
+                            targets.append(g.mid)
+                    if targets == []:
+                        ki.sendText(msg.to, "ล้มเหลว")
+                        kk.sendText(msg.to, "")
+                        kc.sendText(msg.to, "")
+                    else:
+                        for target in targets:
+                            try:
+                                del wait["blacklist"][target]
+                                f = codecs.open('st2__b.json', 'w', 'utf-8')
+                                json.dump(wait["blacklist"], f, sort_keys=True, indent=4, ensure_ascii=False)
+                                cl.sendText(msg.to, "แก้แบน....")
+                                ki.sendText(msg.to, "")
+                                kk.sendText(msg.to, "")
+                                kc.sendText(msg.to, "")
+                            except:
+                                ki.sendText(msg.to, "สำเร็จ")
+                                kk.sendText(msg.to, "")
+                                kc.sendText(msg.to, "")
+
+
             elif "Ban @" in msg.text:
                 if msg.toType == 2:
                     print "[Ban]ok"
@@ -1457,10 +1489,10 @@ def bot(op):
                                 kk.sendText(msg.to,"")
                                 kc.sendText(msg.to,"")
 
-
+#---------------------------------------------
 
             elif "แบน @" in msg.text:
-                if msg.toType == 2:
+                 if msg.toType == 2:
                     print "[Ban]ok"
                     _name = msg.text.replace("แบน @", "")
                     _nametarget = _name.rstrip('  ')
@@ -1490,7 +1522,7 @@ def bot(op):
                                 kk.sendText(msg.to, "")
                                 kc.sendText(msg.to, "")
 
-
+#---------------------------------------------
             elif "Unban @" in msg.text:
                     if msg.toType == 2:
                         print "[Unban]ok"
@@ -1521,45 +1553,11 @@ def bot(op):
                                     ki.sendText(msg.to, "สำเร็จ")
                                     kk.sendText(msg.to, "")
                                     kc.sendText(msg.to, "")
-
-
-            elif "แก้แบน @" in msg.text:
-                    if msg.toType == 2:
-                        print "[Unban]ok"
-                        _name = msg.text.replace("แก้แบน @", "")
-                        _nametarget = _name.rstrip('  ')
-                        gs = ki.getGroup(msg.to)
-                        gs = kk.getGroup(msg.to)
-                        gs = kc.getGroup(msg.to)
-                        targets = []
-                        for g in gs.members:
-                                if _nametarget == g.displayName:
-                                        targets.append(g.mid)
-                                if targets == []:
-                                    ki.sendText(msg.to, "ล้มเหลว")
-                                    kk.sendText(msg.to, "")
-                                    kc.sendText(msg.to, "")
-                                else:
-                                    for target in targets:
-                                        try:
-                                            del wait["blacklist"][target]
-                                            f = codecs.open('st2__b.json', 'w', 'utf-8')
-                                            json.dump(wait["blacklist"], f, sort_keys=True, indent=4,
-                                                      ensure_ascii=False)
-                                            cl.sendText(msg.to, "แก้แบน....")
-                                            ki.sendText(msg.to, "")
-                                            kk.sendText(msg.to, "")
-                                            kc.sendText(msg.to, "")
-                                        except:
-                                            ki.sendText(msg.to, "สำเร็จ")
-                                            kk.sendText(msg.to, "")
-                                            kc.sendText(msg.to, "")
-
-
-
+#-------------------------------------------------
 
 #-----------------------------------------------
             elif msg.text in ["Test","เทส"]:
+                print ["test"]
                 ki.sendText(msg.to,"Ok บอทใช้ได้ปกติ")
                 kk.sendText(msg.to,"")
                 kc.sendText(msg.to,"")
@@ -1604,6 +1602,7 @@ def bot(op):
                 kc.sendText(msg.to,"")
 #-----------------------------------------------
             elif msg.text in ["Respon","respon"]:
+                print ["reset"]
                 ki.sendText(msg.to,"รีเซ็ท...")
                 kk.sendText(msg.to,"")
                 kc.sendText(msg.to,"")
@@ -1620,13 +1619,15 @@ def bot(op):
 
 #------------------------------------------------------------------
             elif msg.text in ["Ban"]:
+                print ["ban kn"]
                 wait["wblacklist"] = True
                 cl.sendText(msg.to,"ลง คท ต่อ")
                 ki.sendText(msg.to,"")
                 kk.sendText(msg.to,"")
                 kc.sendText(msg.to,"")
 
-            elif msg.text in ["แบน"]:
+            elif msg.text in ["แบนคท"]:
+                print ["ban kn"]
                 wait["wblacklist"] = True
                 cl.sendText(msg.to,"ลง คท ต่อ")
                 ki.sendText(msg.to,"")
@@ -1635,13 +1636,15 @@ def bot(op):
 
 
             elif msg.text in ["Unban"]:
+                print ["Unban kn"]
                 wait["dblacklist"] = True
                 cl.sendText(msg.to,"ลง คท ต่อ")
                 ki.sendText(msg.to,"")
                 kk.sendText(msg.to,"")
                 kc.sendText(msg.to,"")
 
-            elif msg.text in ["แก้แบน"]:
+            elif msg.text in ["แก้แบนคท"]:
+                print ["Unban kn"]
                 wait["dblacklist"] = True
                 cl.sendText(msg.to,"ลง คท ต่อ")
                 ki.sendText(msg.to,"")
@@ -1650,7 +1653,7 @@ def bot(op):
 
             elif msg.text in ["Banlist"]:
                 if wait["blacklist"] == {}:
-                    cl.sendText(msg.to,"nothing")
+                    cl.sendText(msg.to,"ไม่มีรายชื่อสีดำ")
                     ki.sendText(msg.to,"")
                     kk.sendText(msg.to,"")
                     kc.sendText(msg.to,"")
@@ -1663,12 +1666,12 @@ def bot(op):
 
             elif msg.text in ["เช็คริส"]:
                 if wait["blacklist"] == {}:
-                    cl.sendText(msg.to,"nothing")
+                    cl.sendText(msg.to,"กลุ่มนี้ไม่มีรายชื่อสีดำ")
                     ki.sendText(msg.to,"")
                     kk.sendText(msg.to,"")
                     kc.sendText(msg.to,"")
                 else:
-                    cl.sendText(msg.to,"Blacklist user")
+                    cl.sendText(msg.to,"รายชื่อสีดำ")
                     mc = ""
                     for mi_d in wait["blacklist"]:
                         mc += "->" +cl.getContact(mi_d).displayName + "\n"
